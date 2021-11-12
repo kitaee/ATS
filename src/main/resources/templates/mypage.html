@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>마이페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/mypage.css">
 </head>
 <body>
-
+    <div class="test" th:text="|${member}님 환영합니다.|">thymeleaf로 로그인한 멤버 이름 보여주기</div>
+    <button type="button" onclick="location.href='registerStore'">가게 등록하기</button>
+    <button type="button" onclick="location.href='joinUs.jsp'">내 가게 보기</button>
 </body>
 </html>

@@ -8,12 +8,12 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+
 public class MemoryMemberRepository implements MemberRepository{
     private final EntityManager em;
     long sequence = 0L;
 
-    @Autowired
+
     public MemoryMemberRepository(EntityManager em) {
         this.em = em;
     }

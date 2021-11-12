@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자리있나요?</title>
+    <link rel="stylesheet" type="text/css" href="/css/registerStore.css">
+</head>
+<body>
+<div class="main">
+    <div id="grid">
+        <div class="left">
+        </div>
+        <div class="center">
+            <form action="/registerStore" method="post">
+                <div class="login_title">
+                    가게 등록
+                </div>
+                <div class="enter_id">
+                    <div class="join_info">사업자명</div><input type="text" id="id" name="businessName" placeholder="사업자명">
+                </div>
+                <div class="enter_pw">
+                    <span class="join_info">가게이름</span><input type="text" id="password" name="storeName" placeholder="가게이름">
+                </div>
+                <div class="enter_pw_confirm_question">
+                    <span class="join_info">유형</span>
+                    <select class="password_confirm_question" name="type">
+                        <option value="cafe">카페</option>
+                        <option value="restaurant">음식점</option>
+                        <option value="bar">술집</option>
+                        <option value="etc">기타</option>
+                    </select>
+                </div>
+                <div class="address">
+                    <span class="address_info">주소</span> <input type="text" id="address_kakao"  class="enter_address" value ="주소찾기" name="address" readonly /><br>
+                    <span class="address_info">상세 주소</span><input type="text" class="enter_address" name="detailAddress" />
+                </div>
+                <div class="enter_pw">
+                    <span class="join_info">번호</span><input type="text" id="phone" name="phone" placeholder="가게번호 or 사업자 전화번호">
+                </div>
+                <div class="login_complete">
+                    <button type="submit" class="login_complete_button">가게등록</button>
+                </div>
+            </form>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+</div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+</script>
+</body>
+</html>
