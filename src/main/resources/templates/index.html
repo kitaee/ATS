@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<!--<script th:inline="javascript">-->
+<!--    var flag = [[${flag}]];-->
+<!--    if (flag ==1){-->
+<!--        alert("중복된 id입니다");-->
+<!--    }-->
+<!--</script>-->
+<div class="main">
+    <div class="container a-container" id="a-container">
+        <form class="form" id="a-form" method="post" action="/">
+            <h2 class="form_title title">회원가입</h2>
+            <div class="form__icons"><img src="/image/logo.png" alt="로고" width="150px" height="120px"></div>
+            <div class="validate_id" th:if="${flag}==1" th:text="|중복된 ID입니다.|"></div>
+            <input class="form__input" type="text" placeholder="Id" name = "id">
+            <input class="form__input" type="password" placeholder="Password" name="password">
+            <input class="form__input" type="text" placeholder="Name" name= "name">
+            <input class="form__input" type="text" placeholder="Email" name = "email">
+            <button type = "submit" class="button">회원가</button>
+        </form>
+    </div>
+    <div class="container b-container" id="b-container">
+        <form class="form" id="b-form" method="post" action="">
+            <h2 class="form_title title">로그인</h2>
+            <div class="form__icons"><img src="/image/logo.png" alt="로고" width="150px" height="120px"></div>
+            <div class="validate_id" th:if="${noneId}==1" th:text="|아이디와 비밀번호가 일치하지 않습니다.|"></div>
+            <input class="form__input" type="text" placeholder="Id" name="loginId">
+            <input class="form__input" type="password" placeholder="Password" name ="loginPassword">
+            <a class="form__link">비밀번호를 까먹으셨습니까?</a>
+            <button type = "submit" class="button">로그인</button>
+        </form>
+    </div>
+    <div class="switch" id="switch-cnt">
+        <div class="switch__circle"></div>
+        <div class="switch__circle switch__circle--t"></div>
+        <div class="switch__container" id="switch-c1">
+            <h2 class="switch__title title">환영합니다 !</h2>
+            <p class="switch__description description">우리 자리있어요? 서비스를 이용하실려면 개인정보를 이용해 로그인해주세요.</p>
+            <button type ="submit" class="switch__button button switch-btn">로그인하기</button>
+        </div>
+        <div class="switch__container is-hidden" id="switch-c2">
+            <h2 class="switch__title title"></h2>
+            <p class="switch__description description">우리 자리있어요? 서비스를 이용하시려면 먼저 회원가입을 진행해주세요.</p>
+            <button type = "submit" class="switch__button button switch-btn">회원가입하기</button>
+        </div>
+    </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>
