@@ -29,7 +29,7 @@ public class StoreController {
     }
 
     @PostMapping("/registerStore")
-    public String registerStore(StoreForm storeForm, HttpServletRequest request){
+    public String registerStore(StoreForm storeForm, HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         Store store = new Store();
@@ -41,6 +41,7 @@ public class StoreController {
         store.setPhone(storeForm.getPhone());
 
         storeService.register(store);
+        model.addAttribute("member", member.getName());
         return "mypage";
     }
 }

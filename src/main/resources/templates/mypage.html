@@ -2,12 +2,74 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지</title>
-    <link rel="stylesheet" type="text/css" href="/css/mypage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="copyright" content="MACode ID, https://macodeid.com/">
+
+    <title>SeoGram - SEO Agency Template</title>
+
+    <link rel="stylesheet" href="/css/maicons.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/css/animate.css">
+
+    <link rel="stylesheet" href="/css/theme.css">
+
 </head>
 <body>
-    <div class="test" th:text="|${member}님 환영합니다.|">thymeleaf로 로그인한 멤버 이름 보여주기</div>
-    <button type="button" onclick="location.href='registerStore'">가게 등록하기</button>
-    <button type="button" onclick="location.href='joinUs.jsp'">내 가게 보기</button>
+<!-- Blog -->
+<div class="page-section">
+    <div class="container">
+        <div class="text-center wow fadeInUp">
+            <div class="subhead" th:text="|${member}사장님 환영합니다|">thymeleaf</div>
+            <h2 class="title-section">자리있나요?</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-4 py-3 wow fadeInUp">
+                <div class="card-blog">
+                    <div class="header">
+                        <div class="post-thumb">
+                            <img src="/image/logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <h5 class="post-title"><a href="registerStore">내 가게 등록하기</a></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 py-3 wow fadeInUp">
+                <div class="card-blog">
+                    <div class="header">
+                        <div class="post-thumb">
+                            <img src="/image/logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <h5 class="post-title"><a href="registerStore">내 가게 보기</a></h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 py-3 wow fadeInUp">
+                <div class="card-blog">
+                    <div class="header">
+                        <div class="post-thumb">
+                            <img src="/image/logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <h5 class="post-title"><a href="registerStore">이기태 농구왕</a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

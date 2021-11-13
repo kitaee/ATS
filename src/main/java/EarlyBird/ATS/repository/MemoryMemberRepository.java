@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class MemoryMemberRepository implements MemberRepository{
     private final EntityManager em;
-    long sequence = 0L;
 
 
     public MemoryMemberRepository(EntityManager em) {
@@ -20,7 +19,9 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Member save(Member member) {
-        member.setCount(++sequence);
+        long index = em.createQuery("select m from Member m",Member.class)
+                .getResultList().size()+1;
+        member.setCount(index);
         em.persist(member);
         return member;
     }
