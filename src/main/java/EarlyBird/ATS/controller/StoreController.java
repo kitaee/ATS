@@ -23,9 +23,9 @@ public class StoreController {
         this.storeService = storeService;
     }
 
-    @GetMapping("/registerStore")
+    @GetMapping("/addStore")
     public String registerStoreView(){
-        return "registerStore";
+        return "addStore";
     }
 
     @PostMapping("/registerStore")
