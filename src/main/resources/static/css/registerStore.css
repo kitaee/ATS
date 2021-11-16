@@ -38,3 +38,9 @@ html, body {
 .seat{
     color : black;
 }
+
+.goToNextIndex{
+    font-weight : bold;
+    font-size : 20px;
+    color : blue;
+}

@@ -39,6 +39,8 @@ public class StoreController {
         store.setAddress(storeForm.getAddress());
         store.setDetailAddress(storeForm.getDetailAddress());
         store.setPhone(storeForm.getPhone());
+        store.setPositionIndex(storeForm.getTotalSeat());
+
 
         storeService.register(store);
         model.addAttribute("member", member.getName());

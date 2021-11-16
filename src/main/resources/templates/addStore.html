@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel ="stylesheet" href="/css/sidebar.css">
     <script src="/js/addStore.js"></script>
+    <script src="/js/addStoreOtherFunction.js"></script>
     <style type="text/css">
 
         .drag{
@@ -95,13 +96,14 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="singlebutton"> </label>
                         <div class="col-md-4">
-                            <button id="singlebutton" name="singlebutton" class="btn btn-primary">다음</button>
+                            <button id="singlebutton" name="singlebutton" class="btn btn-primary" type="button">다음</button>
                         </div>
                     </div>
 
                 </fieldset>
             </form>
-
+            <br><br>
+            <div class="goToNextIndex">정보를 다 입력하셨으면 스크롤을 내려 가게 배치도를 완성해주세요!</div>
         </div>
     </div>
 </div>
@@ -111,8 +113,8 @@
             <div class="menu">
                 <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
                 <ul>
-                    <li><a id="2table" class="item" ><img src="/image/2table.png "width="30" height="30"><div>2인테이블</div></a></li>
-                    <li><a id="4table" class="item"><img src="/image/4table.png" width="30" height="30"> <div>4인테이블</div></a></li>
+                    <li><a id="2table" class="item" name="2table" onclick="plus();"><img src="/image/2table.png "width="30" height="30"><div>2인테이블</div></a></li>
+                    <li><a id="4table" class="item" name="4table" onclick="plus();"><img src="/image/4table.png" width="30" height="30"> <div>4인테이블</div></a></li>
                     <li><a id="counter" class="item"><img src="/image/colorCounter.png" width="30" height="30"><div>카운터</div></a></li>
                     <li><a id="gate" class="item"><img src="/image/exit.png" width="30" height="30"><div>출입문</div></a></li>
                     <li><a id="toilet" class="item"><img src="/image/restroom.png" width="30" height="30"><div>화장실</div></a></li>
@@ -122,7 +124,7 @@
         </div>
         <div id="canvas">
             <div class="seat">
-                총 좌석 수 : <input name="seat" placeholder="총 좌석수" required="" type="text" id="seat">
+                총 좌석 수 : <span name="totalSeat" id="seat">0</span>
             </div>
             여기다가 꾸며주세요!
         </div>
@@ -131,6 +133,7 @@
         메뉴바에 있는 가구들을 클릭 후 <br>
         드래그앤 드랍으로 손님들에게 보여줄 가게 배치도를 꾸며주세요!!
     </div>
+    <button type = "submit">완료</button>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -154,18 +157,20 @@
                     }
                 }).open();
             });
+
             document.getElementById("2table").addEventListener("click", function () {
                 img = document.createElement("img");
-                img.src = "/image/square.png"
+                img.src = "/image/square.png";
                 img.className="drag";
                 img.width = "70";
                 img.height = "70";
                 img.id="twoTable";
+                document.getElementById("seat").innerHTML
                 document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("4table").addEventListener("click", function () {
                 img = document.createElement("img");
-                img.src = "/image/rectangle.png"
+                img.src = "/image/rectangle.png";
                 img.className="drag";
                 img.width = "70";
                 img.height = "70";
@@ -175,7 +180,7 @@
             document.getElementById("toilet").addEventListener("click", function () {
                 img = document.createElement("img");
                 img.className="drag";
-                img.src = "/image/toilet.png"
+                img.src = "/image/toilet.png";
                 img.width = "140";
                 img.height = "70";
                 img.id="wc";
@@ -184,7 +189,7 @@
             document.getElementById("counter").addEventListener("click", function () {
                 img = document.createElement("img");
                 img.className="drag";
-                img.src = "/image/counter.png"
+                img.src = "/image/counter.png";
                 img.width = "70";
                 img.height = "70";
                 img.id="counte";
@@ -192,7 +197,7 @@
             });
             document.getElementById("position").addEventListener("click", function () {
                 img = document.createElement("img");
-                img.src = "/image/position.png"
+                img.src = "/image/position.png";
                 img.className ="drag";
                 img.width = "50";
                 img.height = "50";
@@ -201,7 +206,7 @@
             });
             document.getElementById("gate").addEventListener("click", function () {
                 img = document.createElement("img");
-                img.src = "/image/entrance.png"
+                img.src = "/image/entrance.png";
                 img.className="drag";
                 img.width = "30";
                 img.height = "30";

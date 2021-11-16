@@ -15,3 +15,4 @@ $(window).on("wheel", function(e) {
     var posTop =(page-1) * $(window).height();
     mHtml.animate({scrollTop : posTop});
 })
+
