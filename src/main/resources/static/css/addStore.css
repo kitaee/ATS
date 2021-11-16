@@ -16,7 +16,7 @@ html, body {
     position: relative;
 }
 
-#grid{
+.canvasGrid{
     display : grid;
-    grid-template-columns : 230px 1fr;
+    grid-template-columns : 300px 1fr;
 }

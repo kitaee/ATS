@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <link rel ="stylesheet" href="/css/addStore.css">
+    <link rel ="stylesheet" href="/css/registerStore.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -12,6 +12,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel ="stylesheet" href="/css/sidebar.css">
     <script src="/js/addStore.js"></script>
+    <style type="text/css">
+
+        .drag{
+            position:relative;
+            cursor:hand;
+            z-index: 100;
+        }
+
+    </style>
 </head>
 <!------ Include the above in your HEAD tag ---------->
 <body>
@@ -29,7 +38,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">사업자 이름</label>
                         <div class="col-md-4">
-                            <input id="textinput" name="businessName" placeholder="사용자 이름" class="form-control input-md" required="" type="text">
+                            <input name="businessName" placeholder="사용자 이름" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -38,7 +47,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">가게 상호명</label>
                         <div class="col-md-4">
-                            <input id="textinput" name="storeName" placeholder="가게 상호명" class="form-control input-md" required="" type="text">
+                            <input name="storeName" placeholder="가게 상호명" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -60,7 +69,7 @@
                         <label class="col-md-4 control-label">주소</label>
                         <div class="col-md-4">
                             <input type="text" id="address_kakao"  class="form-control input-md" name="address" readonly /><br>
-                            <input type="text" id="textinput" class="form-control input-md" name="detailAddress" placeholder="상세주소" />
+                            <input type="text"  class="form-control input-md" name="detailAddress" placeholder="상세주소" />
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -68,7 +77,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">번호</label>
                         <div class="col-md-4">
-                            <input id="textinput" name="textinput" placeholder="번호" class="form-control input-md" required="" type="text">
+                            <input name="textinput" placeholder="번호" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -97,28 +106,45 @@
     </div>
 </div>
 <div class="section" id="section2">
-    <div id="grid">
-        <div class="menu">
-            <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
-            <ul>
-                <li><img src="https://blog.kakaocdn.net/dn/QG4Wl/btqIPZexSQ1/YM7lxTCD1dCIsO5V3y51VK/img.png" width="50" height="120" ><a id="2table" class="item" ><div>2인테이블</div></a></li>
-                <li><a id="4table" class="item"><div>4인테이블</div></a></li>
-                <li><a id="counter" class="item"><div>카운터</div></a></li>
-                <li><a id="gate" class="item"><div>출입문</div></a></li>
-                <li><a id="toilet" class="item"><div>화장실</div></a></li>
-                <li><a id="position" class="item"><div>현위치</div></a></li>
-            </ul>
+    <div class="canvasGrid">
+        <div class ="context">
+            <div class="menu">
+                <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
+                <ul>
+                    <li><a id="2table" class="item" ><img src="/image/2table.png "width="30" height="30"><div>2인테이블</div></a></li>
+                    <li><a id="4table" class="item"><img src="/image/4table.png" width="30" height="30"> <div>4인테이블</div></a></li>
+                    <li><a id="counter" class="item"><img src="/image/colorCounter.png" width="30" height="30"><div>카운터</div></a></li>
+                    <li><a id="gate" class="item"><img src="/image/exit.png" width="30" height="30"><div>출입문</div></a></li>
+                    <li><a id="toilet" class="item"><img src="/image/restroom.png" width="30" height="30"><div>화장실</div></a></li>
+                    <li><a id="position" class="item"><img src="/image/colorPosition.png" width="30" height="30"> <div>현위치</div></a></li>
+                </ul>
+            </div>
         </div>
         <div id="canvas">
-            <button onclick="draw()">그리기 버튼</button>
+            <div class="seat">
+                총 좌석 수 : <input name="seat" placeholder="총 좌석수" required="" type="text" id="seat">
+            </div>
+            여기다가 꾸며주세요!
         </div>
     </div>
-
+    <div class="introduce">
+        메뉴바에 있는 가구들을 클릭 후 <br>
+        드래그앤 드랍으로 손님들에게 보여줄 가게 배치도를 꾸며주세요!!
+    </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script >
-    window.onload = function() {
-        {
+<script>
+    // $('.drag').addEventListener('mousedown',function (){
+    //     if((event.button===2)||(event.which===3)){
+    //         $(this).remove();
+    //     }
+    // });
+    // document.addEventListener('contextmenu', function() {
+    //     event.preventDefault();
+    // });
+    // window.onload = function() {
+    //     {
+    //
             document.getElementById("address_kakao").addEventListener("click", function () { //주소입력칸을 클릭하면
                 //카카오 지도 발생
                 new daum.postCode({
@@ -129,62 +155,94 @@
                 }).open();
             });
             document.getElementById("2table").addEventListener("click", function () {
-                //alert("2table")
-
                 img = document.createElement("img");
                 img.src = "/image/square.png"
-                img.width = "40";
-                img.height = "40";
-                document.body.appendChild(img);
+                img.className="drag";
+                img.width = "70";
+                img.height = "70";
+                img.id="twoTable";
+                document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("4table").addEventListener("click", function () {
                 img = document.createElement("img");
                 img.src = "/image/rectangle.png"
+                img.className="drag";
                 img.width = "70";
                 img.height = "70";
-                document.body.appendChild(img);
+                img.id="fourTable";
+                document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("toilet").addEventListener("click", function () {
                 img = document.createElement("img");
+                img.className="drag";
                 img.src = "/image/toilet.png"
                 img.width = "140";
                 img.height = "70";
-                document.body.appendChild(img);
+                img.id="wc";
+                document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("counter").addEventListener("click", function () {
                 img = document.createElement("img");
+                img.className="drag";
                 img.src = "/image/counter.png"
                 img.width = "70";
                 img.height = "70";
-                document.body.appendChild(img);
+                img.id="counte";
+                document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("position").addEventListener("click", function () {
                 img = document.createElement("img");
                 img.src = "/image/position.png"
+                img.className ="drag";
                 img.width = "50";
                 img.height = "50";
-                document.body.appendChild(img);
+                img.id="now";
+                document.getElementById("canvas").appendChild(img);
             });
             document.getElementById("gate").addEventListener("click", function () {
                 img = document.createElement("img");
                 img.src = "/image/entrance.png"
+                img.className="drag";
                 img.width = "30";
                 img.height = "30";
-                document.body.appendChild(img);
+                img.id="door";
+                document.getElementById("canvas").appendChild(img);
             });
-        }
-    }
+        // }
+    // }
 
-    function draw(){
-        var canvas = document.getElementById('canvas');
-        if (canvas.getContext){
-            var ctx = canvas.getContext('2d');
-
-            ctx.fillRect(25,25,100,100);
-            ctx.clearRect(45,45,60,60);
-            ctx.strokeRect(50,50,50,50);
-        }
-    }
+    var dragobject={
+    z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
+    initialize:function(){
+    document.onmousedown=this.drag
+    document.onmouseup=function(){this.dragapproved=0}
+},
+    drag:function(e){
+    var evtobj=window.event? window.event : e
+    this.targetobj=window.event? event.srcElement : e.target
+    if (this.targetobj.className=="drag"){
+    this.dragapproved=1
+    if (isNaN(parseInt(this.targetobj.style.left))){this.targetobj.style.left=0}
+    if (isNaN(parseInt(this.targetobj.style.top))){this.targetobj.style.top=0}
+    this.offsetx=parseInt(this.targetobj.style.left)
+    this.offsety=parseInt(this.targetobj.style.top)
+    this.x=evtobj.clientX
+    this.y=evtobj.clientY
+    if (evtobj.preventDefault)
+    evtobj.preventDefault()
+    document.onmousemove=dragobject.moveit
+}
+},
+    moveit:function(e){
+    var evtobj=window.event? window.event : e
+    if (this.dragapproved==1){
+    this.targetobj.style.left=this.offsetx+evtobj.clientX-this.x+"px"
+    this.targetobj.style.top=this.offsety+evtobj.clientY-this.y+"px"
+    return false
+}
+}
+}
+        dragobject.initialize()
 
 </script>
 </body>
