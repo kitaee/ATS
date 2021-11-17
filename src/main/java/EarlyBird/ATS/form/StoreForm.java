@@ -17,4 +17,5 @@ public class StoreForm {
     private String phone;
     private List<String> positionIndex;
     private Long totalSeat;
+    private String introduce;
 }

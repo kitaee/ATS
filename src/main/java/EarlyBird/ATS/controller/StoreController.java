@@ -52,25 +52,36 @@ public class StoreController {
 //    }
 
     @RequestMapping(value = "/addStore", method = { RequestMethod.POST })
-    public void test(@RequestParam("totalSeat") Long totalSeat , @RequestParam("positionIndex") List<String> positionIndex,
-                     StoreForm storeForm) throws  Exception{
+    public String test(@RequestParam("totalSeat") Long totalSeat , @RequestParam("positionIndex") List<String> positionIndex,
+                     StoreForm storeForm, @RequestParam("businessName") String businessName,
+                     @RequestParam("storeName") String storeName,
+                     @RequestParam("phone") String phone,
+                     @RequestParam("introduce") String introduce,
+                     @RequestParam("type") String type,
+                     @RequestParam("address") String address,
+                     @RequestParam("detailAddress") String detailAddress,
+                     HttpServletRequest request, Model model) throws  Exception{
 
-        System.out.println(totalSeat);
-        for(int i=0;i<positionIndex.size();i++){
-            System.out.println(positionIndex.get(i));
-        }
+//        System.out.println(totalSeat);
+//        for(int i=0;i<positionIndex.size();i++){
+//            System.out.println(positionIndex.get(i));
+//        }
 
+        HttpSession session = request.getSession();
+        Member member = (Member)request.getAttribute("member");
         Store store = new Store();
-        store.setId("스타벅스");
-        store.setBusinessName(storeForm.getBusinessName());
-        store.setStoreName(storeForm.getStoreName());
-        store.setType(storeForm.getType());
-        store.setAddress(storeForm.getAddress());
-        store.setDetailAddress(storeForm.getDetailAddress());
-        store.setPhone(storeForm.getPhone());
+        store.setId("이기태의 스타벅스");
+        store.setBusinessName(businessName);
+        store.setStoreName(storeName);
+        store.setIntroduce(introduce);
+        store.setPhone(phone);
         store.setTotalSeat(totalSeat);
+        store.setAddress(address);
+        store.setType(type);
+        store.setDetailAddress(detailAddress);
         store.setPositionIndex(positionIndex);
         storeService.register(store);
 
+        return "mypage";
     }
 }

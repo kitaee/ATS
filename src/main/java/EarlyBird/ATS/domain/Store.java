@@ -22,5 +22,6 @@ public class Store {
     private String phone;
     private List<String> positionIndex; // 차있는지 안차있는지도 체크
     private Long totalSeat;
+    private String introduce;
 
 }

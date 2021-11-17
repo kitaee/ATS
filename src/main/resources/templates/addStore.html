@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel ="stylesheet" href="/css/sidebar.css">
     <script src="/js/addStore.js"></script>
+    <script src="/js/ajax.js"></script>
     <script src="/js/addStoreOtherFunction.js"></script>
     <style type="text/css">
 
@@ -39,7 +40,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">사업자 이름</label>
                         <div class="col-md-4">
-                            <input name="businessName" placeholder="사용자 이름" class="form-control input-md" required="" type="text">
+                            <input name="businessName" id="businessName" placeholder="사용자 이름" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">가게 상호명</label>
                         <div class="col-md-4">
-                            <input name="storeName" placeholder="가게 상호명" class="form-control input-md" required="" type="text">
+                            <input name="storeName" id="storeName"placeholder="가게 상호명" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -56,7 +57,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">유형</label>
                         <div class="col-md-4">
-                            <select class="password_confirm_question" name="type">
+                            <select class="password_confirm_question" name="type" id="type">
                                 <option value="cafe">카페</option>
                                 <option value="restaurant">음식점</option>
                                 <option value="bar">술집</option>
@@ -70,7 +71,7 @@
                         <label class="col-md-4 control-label">주소</label>
                         <div class="col-md-4">
                             <input type="text" id="address_kakao"  class="form-control input-md" name="address" readonly /><br>
-                            <input type="text"  class="form-control input-md" name="detailAddress" placeholder="상세주소" />
+                            <input type="text" id="detailAddress" class="form-control input-md" name="detailAddress" placeholder="상세주소" />
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="textinput">번호</label>
                         <div class="col-md-4">
-                            <input name="textinput" placeholder="번호" class="form-control input-md" required="" type="text">
+                            <input name="textinput" id="phone" placeholder="번호" class="form-control input-md" required="" type="text">
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -88,8 +89,6 @@
                         <label class="col-md-4 control-label" for="textinput">가게 소개</label>
                         <div class="col-md-4">
                             <input id="textinput" name="phone" placeholder="가게 소개글" class="form-control input-md" required="" type="text">
-                            <input type='text' name='buffer' value="<%=bufferedWKT%>" />
-                            <span class="help-block"> </span>
                         </div>
                     </div>
 
