@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <title>자리있나요?</title>
     <link rel="stylesheet" type="text/css" href="/css/registerStore.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sidebar.css">
+
 </head>
 <body>
+<div class="menu">
+    <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">
+    <ul>
+        <li><button id="2table" class="item"><div>2인테이블</div></button></li>
+        <li><button id="4table" class="item"><div>4인테이블</div></button></li>
+        <li><button id="counter" class="item"><div>카운터</div></button></li>
+        <li><button id="gate" class="item"><div>출입문</div></button></li>
+        <li><button id="toilet" class="item"><div>화장실</div></button></li>
+        <li><button id="position" class="item"><div>현위치</div></button></li>
+    </ul>
+</div>
 <div class="main">
     <div id="grid">
         <div class="left">
@@ -47,8 +63,13 @@
     </div>
 </div>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    let twoTable;
+    let fourTable;
+    let toilet;
+    let counter;
+    let position;
+    let gate;
 window.onload = function(){
     document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
         //카카오 지도 발생
@@ -59,7 +80,58 @@ window.onload = function(){
             }
         }).open();
     });
+
+    twoTable=document.getElementById("2table");
+    fourTable=document.getElementById("4table");
+    toilet=document.getElementById("toilet");
+    counter=document.getElementById("counter");
+    position=document.getElementById("position");
+    gate=document.getElementById("gate");
+    two=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/square.png"
+        img.width="10"; img.height="10";
+        document.body.appendChild(img);
+    }
+    four=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/rectangle.png"
+        img.width="20"; img.height="10";
+        document.body.appendChild(img);
+    }
+    toil=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/toilet.png"
+        img.width="10"; img.height="10";
+        document.body.appendChild(img);
+    }
+    counte=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/counter.png"
+        img.width="10"; img.height="10";
+        document.body.appendChild(img);
+    }
+    door=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/entrance.png"
+        img.width="10"; img.height="10";
+        document.body.appendChild(img);
+    }
+    now=function makeImg(){
+        img=document.createElement("img");
+        img.src="/image/position.png"
+        img.width="5"; img.height="5";
+        document.body.appendChild(img);
+    }
+    twoTable.onclick=two;
+    fourTable.onclick=four;
+    toilet.onclick=toil;
+    gate.onclick=door;
+    counter.onclick=counte;
+    position.onclick=now;
 }
+
+
 </script>
 </body>
 </html>

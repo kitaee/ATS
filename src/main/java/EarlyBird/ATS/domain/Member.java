@@ -6,11 +6,9 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 @Setter @Getter
 public class Member {
 
-    @Id
     private Long type;
     private String id;
     private String password;

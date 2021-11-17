@@ -4,6 +4,7 @@ import EarlyBird.ATS.domain.Member;
 import EarlyBird.ATS.form.JoinForm;
 import EarlyBird.ATS.repository.MemberRepository;
 import EarlyBird.ATS.service.MemberService;
+import com.google.firebase.auth.FirebaseAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class LoginController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+
 
     public LoginController(MemberService memberService, MemberRepository memberRepository) {
         this.memberService = memberService;
@@ -48,25 +50,30 @@ public class LoginController {
         member.setName(joinform.getName());
         member.setEmail(joinform.getEmail());
         member.setType(1L);
+
         if (joinform.getId() != null) {  //회원가입 창
             if (memberService.UniqueName(member) == 1) {
                 model.addAttribute("flag", 1);
             } else
                 memberService.join(member);
         }
-        else {
+        else { //로그인 창
             Member loginMember = new Member();
             loginMember.setId(joinform.getLoginId());
             loginMember.setPassword(joinform.getLoginPassword());
             Optional<Member> find_member = memberService.findMember(loginMember.getId());
             if (find_member.isPresent()) {
-                HttpSession session = request.getSession();
-                session.setAttribute("member", find_member.get());
-                model.addAttribute("member", find_member.get().getName());
-                return "mypage";
-            } else {
-                model.addAttribute("noneId", 1);
+                if(find_member.get().getPassword().equals(loginMember.getPassword())) {//db값이 있다면
+                    HttpSession session = request.getSession();
+                    session.setAttribute("member", find_member.get());
+                    model.addAttribute("member", find_member.get().getName());
+                    return "mypage";
+                }
+                else
+                    model.addAttribute("noneId", 1);
             }
+            else
+                model.addAttribute("noneId",1);
         }
         return "index";
     }
@@ -77,6 +84,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         if(member==null){
+            System.out.println("asdf");
             System.out.println(member.getName());
             return "index";
         }

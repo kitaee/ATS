@@ -1,6 +1,6 @@
 /*
-		Designed by: SELECTO
-		Original image: https://dribbble.com/shots/5311359-Diprella-Login
+      Designed by: SELECTO
+      Original image: https://dribbble.com/shots/5311359-Diprella-Login
 */
 
 let switchCtn = document.querySelector("#switch-cnt");

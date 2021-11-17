@@ -52,15 +52,16 @@ public class StoreController {
 //    }
 
     @RequestMapping(value = "/addStore", method = { RequestMethod.POST })
-    public void test(@RequestParam("totalSeat") String totalSeat , @RequestParam("positionIndex") List<String> positionIndex,
+    public void test(@RequestParam("totalSeat") Long totalSeat , @RequestParam("positionIndex") List<String> positionIndex,
                      StoreForm storeForm) throws  Exception{
 
-//        System.out.println(totalSeat);
-//        for(int i=0;i<positionIndex.size();i++){
-//            System.out.println(positionIndex.get(i));
-//        }
+        System.out.println(totalSeat);
+        for(int i=0;i<positionIndex.size();i++){
+            System.out.println(positionIndex.get(i));
+        }
 
         Store store = new Store();
+        store.setId("스타벅스");
         store.setBusinessName(storeForm.getBusinessName());
         store.setStoreName(storeForm.getStoreName());
         store.setType(storeForm.getType());

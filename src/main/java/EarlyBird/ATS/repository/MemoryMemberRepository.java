@@ -36,9 +36,9 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public String insertMember(Member member) throws Exception{
-        Firestore dbFiresotre = FirestoreClient.getFirestore();
+        Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionsApiFuture=
-                dbFiresotre.collection(Collection_member).document(member.getId()).set(member);
+                dbFirestore.collection(Collection_member).document(member.getId()).set(member);
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 
@@ -48,13 +48,6 @@ public class MemoryMemberRepository implements MemberRepository{
         DocumentReference documentReference = firestore.collection(Collection_member).document(id);
         ApiFuture<DocumentSnapshot> apiFuture = documentReference.get();
         DocumentSnapshot documentSnapshot = apiFuture.get();
-//        Member member = null;
-//        if(documentSnapshot.exists()){
-//            member = documentSnapshot.toObject(Member.class);
-//            return Optional.ofNullable(member);
-//        }
-//        else
-//            return null;
         return Optional.ofNullable(documentSnapshot.toObject(Member.class));
     }
 
