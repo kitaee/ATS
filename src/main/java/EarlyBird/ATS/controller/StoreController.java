@@ -68,9 +68,11 @@ public class StoreController {
 //        }
 
         HttpSession session = request.getSession();
-        Member member = (Member)request.getAttribute("member");
+        Member member = (Member)session.getAttribute("member");
+
+//        Thread.sleep(3000);
         Store store = new Store();
-        store.setId("이기태의 스타벅스");
+        store.setId(member.getId());
         store.setBusinessName(businessName);
         store.setStoreName(storeName);
         store.setIntroduce(introduce);
