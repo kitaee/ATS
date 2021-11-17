@@ -23,3 +23,8 @@ function plus()  {
   // 결과 출력
   resultElement.innerText = number;
 }
+
+function deleteTable(){
+    var test = event.target;
+    test.remove();
+}
