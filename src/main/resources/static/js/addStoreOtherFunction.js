@@ -9,7 +9,7 @@ function getIndexOfTable(){
         indexArray.push(indexPartArray);
         indexPartArray=[];
     }
-    alert(indexArray);
+    return indexArray;
 }
 
 function plus()  {
@@ -24,7 +24,23 @@ function plus()  {
   resultElement.innerText = number;
 }
 
-function deleteTable(){
-    var test = event.target;
-    test.remove();
+function dataPassing(){
+    const resultElement = document.getElementById('seat');
+    let seat = resultElement.innerText;
+    var totalSeat = seat;
+    var positionIndex = getIndexOfTable();
+
+    $.ajax({
+            url:"/addStore",
+            type:'POST',
+            traditional : true,
+            data :{"totalSeat" : totalSeat, "positionIndex" : positionIndex},
+            success:function(data){
+                alert("완료!");
+            },
+            error:function(jqXHR, textStatus, errorThrown){
+                alert("ajax를 통한 데이터패싱의 에러");
+            }
+        });
 }
+

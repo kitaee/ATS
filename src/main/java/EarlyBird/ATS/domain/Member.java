@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Member {
 
     @Id
-    private Long count;
+    private Long type;
     private String id;
     private String password;
     private String name;

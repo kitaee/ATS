@@ -88,6 +88,7 @@
                         <label class="col-md-4 control-label" for="textinput">가게 소개</label>
                         <div class="col-md-4">
                             <input id="textinput" name="phone" placeholder="가게 소개글" class="form-control input-md" required="" type="text">
+                            <input type='text' name='buffer' value="<%=bufferedWKT%>" />
                             <span class="help-block"> </span>
                         </div>
                     </div>
@@ -133,128 +134,134 @@
             </div>
         </div>
     </div>
-    <button type = "submit">완료</button>
+    <button type = "submit" id="complete" onclick="dataPassing();">완료</button>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-            document.getElementById("2table").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.src = "/image/square.png"
-                img.className="drag";
-                img.width = "70";
-                img.height = "70";
-                img.id="twoTable";
-                document.getElementById("seat").innerHTML
-                document.getElementById("canvas").appendChild(img);
-            });
-            document.getElementById("4table").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.src = "/image/rectangle.png"
-                img.className="drag";
-                img.width = "70";
-                img.height = "70";
-                img.id="fourTable";
-                document.getElementById("canvas").appendChild(img);
-            });
-            document.getElementById("toilet").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.className="drag";
-                img.src = "/image/toilet.png"
-                img.width = "140";
-                img.height = "70";
-                img.id="wc";
-                document.getElementById("canvas").appendChild(img);
-            });
-            document.getElementById("counter").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.className="drag";
-                img.src = "/image/counter.png"
-                img.width = "70";
-                img.height = "70";
-                img.id="counter";
-                document.getElementById("canvas").appendChild(img);
-            });
-            document.getElementById("position").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.src = "/image/position.png"
-                img.className ="drag";
-                img.width = "50";
-                img.height = "50";
-                img.id="now";
-                document.getElementById("canvas").appendChild(img);
-            });
-            document.getElementById("gate").addEventListener("click", function () {
-                img = document.createElement("img");
-                img.src = "/image/entrance.png"
-                img.className="drag";
-                img.width = "30";
-                img.height = "30";
-                img.id="door";
-                document.getElementById("canvas").appendChild(img);
-            });
-        // }
+    document.getElementById("2table").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.src = "/image/square.png"
+        img.className="drag";
+        img.width = "70";
+        img.height = "70";
+        img.id="twoTable";
+        document.getElementById("seat").innerHTML
+        document.getElementById("canvas").appendChild(img);
+    });
+    document.getElementById("4table").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.src = "/image/rectangle.png"
+        img.className="drag";
+        img.width = "70";
+        img.height = "70";
+        img.id="fourTable";
+        document.getElementById("canvas").appendChild(img);
+    });
+    document.getElementById("toilet").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.className="drag";
+        img.src = "/image/toilet.png"
+        img.width = "140";
+        img.height = "70";
+        img.id="wc";
+        document.getElementById("canvas").appendChild(img);
+    });
+    document.getElementById("counter").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.className="drag";
+        img.src = "/image/counter.png"
+        img.width = "70";
+        img.height = "70";
+        img.id="counter";
+        document.getElementById("canvas").appendChild(img);
+    });
+    document.getElementById("position").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.src = "/image/position.png"
+        img.className ="drag";
+        img.width = "50";
+        img.height = "50";
+        img.id="now";
+        document.getElementById("canvas").appendChild(img);
+    });
+    document.getElementById("gate").addEventListener("click", function () {
+        img = document.createElement("img");
+        img.src = "/image/entrance.png"
+        img.className="drag";
+        img.width = "30";
+        img.height = "30";
+        img.id="door";
+        document.getElementById("canvas").appendChild(img);
+    });
+    // }
     // }
 
     var dragobject={
-    z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
-    initialize:function(){
-    document.onmousedown=this.drag
-    document.onmouseup=function(){this.dragapproved=0}
-    document.oncontextmenu=function(){
-        var id = event.target.id;
-        var removeTarget = event.target;
-        if(id=='twoTable' || id=='fourTable'){
-            const resultElement = document.getElementById('seat');
-            let number = resultElement.innerText;
-            number = parseInt(number) - 1;
-            resultElement.innerText = number;
-        }
-        removeTarget.remove();
-    }
+        z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
+        initialize:function(){
+            document.onmousedown=this.drag
+            document.onmouseup=function(){this.dragapproved=0}
+            document.oncontextmenu=function(){
+                var id = event.target.id;
+                var removeTarget = event.target;
+                if(id=='twoTable' || id=='fourTable'){
+                    const resultElement = document.getElementById('seat');
+                    let number = resultElement.innerText;
+                    number = parseInt(number) - 1;
+                    resultElement.innerText = number;
+                    removeTarget.remove();
+                    return false;
+                }
+                else if(id=='wc' || id=='door' || id=='counter' || id=='now'){
+                    removeTarget.remove();
+                    return false;
+                }
 
-},
-    drag:function(e){
-    var evtobj=window.event? window.event : e
-    this.targetobj=window.event? event.srcElement : e.target
-    if (this.targetobj.className=="drag"){
-    this.dragapproved=1
-    if (isNaN(parseInt(this.targetobj.style.left))){this.targetobj.style.left=0}
-    if (isNaN(parseInt(this.targetobj.style.top))){this.targetobj.style.top=0}
-    this.offsetx=parseInt(this.targetobj.style.left)
-    this.offsety=parseInt(this.targetobj.style.top)
-    this.x=evtobj.clientX
-    this.y=evtobj.clientY
-    if (evtobj.preventDefault)
-    evtobj.preventDefault()
-    document.onmousemove=dragobject.moveit
-}
-},
-    moveit:function(e){
-    var evtobj=window.event? window.event : e
-    if (this.dragapproved==1){
-    this.targetobj.style.left=this.offsetx+evtobj.clientX-this.x+"px"
-    this.targetobj.style.top=this.offsety+evtobj.clientY-this.y+"px"
-    return false
-}
-}
-}
-        dragobject.initialize()
+            }
+
+        },
+        drag:function(e){
+            var evtobj=window.event? window.event : e
+            this.targetobj=window.event? event.srcElement : e.target
+            if (this.targetobj.className=="drag"){
+                this.dragapproved=1
+                if (isNaN(parseInt(this.targetobj.style.left))){this.targetobj.style.left=0}
+                if (isNaN(parseInt(this.targetobj.style.top))){this.targetobj.style.top=0}
+                this.offsetx=parseInt(this.targetobj.style.left)
+                this.offsety=parseInt(this.targetobj.style.top)
+                this.x=evtobj.clientX
+                this.y=evtobj.clientY
+                if (evtobj.preventDefault)
+                    evtobj.preventDefault()
+                document.onmousemove=dragobject.moveit
+            }
+        },
+        moveit:function(e){
+            var evtobj=window.event? window.event : e
+            if (this.dragapproved==1){
+                this.targetobj.style.left=this.offsetx+evtobj.clientX-this.x+"px"
+                this.targetobj.style.top=this.offsety+evtobj.clientY-this.y+"px"
+                return false
+            }
+        }
+    }
+    dragobject.initialize()
 
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-window.onload = function(){
-    document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            oncomplete: function(data) { //선택시 입력값 세팅
-                document.getElementById("address_kakao").value = data.address; // 주소 넣기
-                document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
+    window.onload = function(){
+        document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+            //카카오 지도 발생
+            new daum.Postcode({
+                oncomplete: function(data) { //선택시 입력값 세팅
+                    document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                }
+            }).open();
+        });
+    }
 </script>
 </body>
 </html>

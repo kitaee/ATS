@@ -15,7 +15,7 @@ public class StoreService {
         this.storeRepository = storeRepository;
     }
 
-    public String register(Store store){
+    public String register(Store store) throws Exception{
         storeRepository.save(store);
         return store.getBusinessName();
     }

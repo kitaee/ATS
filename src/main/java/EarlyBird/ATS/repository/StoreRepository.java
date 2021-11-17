@@ -5,5 +5,5 @@ import EarlyBird.ATS.domain.Store;
 
 public interface StoreRepository {
 
-    Store save(Store store);
+    String save(Store store) throws Exception;
 }

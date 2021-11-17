@@ -17,20 +17,20 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public String join(Member member){
-        memberRepository.save(member);
+    public String join(Member member) throws Exception{
+        memberRepository.insertMember(member);
         return member.getId();
     }
 
-    public int UniqueName(Member member){
-        Optional<Member> result = memberRepository.findById(member.getId());
+    public int UniqueName(Member member) throws Exception{
+        Optional<Member> result = memberRepository.getDetailMember(member.getId());
         if(result.isPresent())
             return 1;
         else return 0;
     }
-    public Optional<Member> findMember(String id){
+    public Optional<Member> findMember(String id) throws Exception{
         Member member = new Member();
-        member = memberRepository.findById(id).get();
+        member = memberRepository.getDetailMember(id).get();
         return Optional.ofNullable(member);
     }
 }

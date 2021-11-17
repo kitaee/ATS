@@ -41,13 +41,14 @@ public class LoginController {
     }
 
     @PostMapping("/")
-    public String Join(JoinForm joinform, Model model, HttpServletRequest request) {
+    public String Join(JoinForm joinform, Model model, HttpServletRequest request) throws Exception{
         Member member = new Member();
         member.setId(joinform.getId());
         member.setPassword(joinform.getPassword());
         member.setName(joinform.getName());
         member.setEmail(joinform.getEmail());
-        if (joinform.getId() != null) {
+        member.setType(1L);
+        if (joinform.getId() != null) {  //회원가입 창
             if (memberService.UniqueName(member) == 1) {
                 model.addAttribute("flag", 1);
             } else
@@ -57,7 +58,7 @@ public class LoginController {
             Member loginMember = new Member();
             loginMember.setId(joinform.getLoginId());
             loginMember.setPassword(joinform.getLoginPassword());
-            Optional<Member> find_member = memberRepository.findById(loginMember.getId());
+            Optional<Member> find_member = memberService.findMember(loginMember.getId());
             if (find_member.isPresent()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("member", find_member.get());
@@ -70,16 +71,18 @@ public class LoginController {
         return "index";
     }
 
-//    @RequestMapping(value="/mypage", method={RequestMethod.GET, RequestMethod.POST})
+    //    @RequestMapping(value="/mypage", method={RequestMethod.GET, RequestMethod.POST})
     @GetMapping("/mypage")
     public String myPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         if(member==null){
+            System.out.println(member.getName());
             return "index";
         }
         else{
             model.addAttribute("member", member.getName());
+            model.addAttribute("memberId",member.getId());
             return "mypage";
         }
     }
