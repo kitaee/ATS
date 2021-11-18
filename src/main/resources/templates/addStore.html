@@ -201,7 +201,27 @@
             document.onmousedown=this.drag
             document.onmouseup=function(){
                 this.dragapproved=0;
+                var activeTarget = event.target;
+                var imageElements = document.getElementsByClassName("drag");
+                for(var i=0;i<imageElements.length;i++){
+                    if(activeTarget==imageElements[i]){
+
+                        if(activeTarget.x<223 || activeTarget.x>1253 || activeTarget.y>1423 || activeTarget.y<810){
+                            alert("테이블을 사각형안에 넣어주세요!");
+                            if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                const resultElement = document.getElementById('seat');
+                                let number = resultElement.innerText;
+                                number = parseInt(number) - 1;
+                                resultElement.innerText = number;
+                            }
+                            activeTarget.remove();
+                        }
+                    }
+                }
+
+                return false;
             }
+
             document.oncontextmenu=function(){
                 var id = event.target.id;
                 var removeTarget = event.target;
@@ -235,6 +255,7 @@
                 if (evtobj.preventDefault)
                     evtobj.preventDefault()
                 document.onmousemove=dragobject.moveit
+
 
             }
         },
