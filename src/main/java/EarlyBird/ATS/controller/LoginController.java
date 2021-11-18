@@ -93,4 +93,11 @@ public class LoginController {
             return "mypage";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "index";
+    }
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <link rel ="stylesheet" href="/css/registerStore.css">
+    <link rel ="stylesheet" href="/css/addStore.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -126,7 +126,9 @@
             </div>
         </div>
     </div>
-    <button type = "button" id="complete">완료</button>
+    <div class="complete">
+        <button type = "button" id="complete">완료</button>
+    </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -197,7 +199,9 @@
         z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
         initialize:function(){
             document.onmousedown=this.drag
-            document.onmouseup=function(){this.dragapproved=0}
+            document.onmouseup=function(){
+                this.dragapproved=0;
+            }
             document.oncontextmenu=function(){
                 var id = event.target.id;
                 var removeTarget = event.target;
@@ -231,6 +235,7 @@
                 if (evtobj.preventDefault)
                     evtobj.preventDefault()
                 document.onmousemove=dragobject.moveit
+
             }
         },
         moveit:function(e){

@@ -1,5 +1,6 @@
 html {
     overflow: hidden;
+    color : red;
 }
 
 html, body {
@@ -18,5 +19,71 @@ html, body {
 
 .canvasGrid{
     display : grid;
-    grid-template-columns : 300px 1fr;
+    grid-template-columns : 220px 1100px;
 }
+
+#canvas{
+    border : 2px solid black;
+    color : red;
+    font-weight : bold;
+    font-size : 15px;
+}
+
+.introduce{
+    font-size : 20px;
+    font-weight : bold;
+    color : blue;
+}
+
+.seat{
+    color : black;
+}
+
+.goToNextIndex{
+    font-weight : bold;
+    font-size : 20px;
+    color : blue;
+}
+
+button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.complete{
+    text-align : center;
+}
+
+
