@@ -84,6 +84,12 @@ public class StoreController {
         store.setPositionIndex(positionIndex);
         storeService.register(store);
 
-        return "mypage";
+        return "redirect:/mypage";
     }
+
+    @GetMapping("/viewStore")
+    public String viewStore(){
+        return "viewStore";
+    }
+
 }

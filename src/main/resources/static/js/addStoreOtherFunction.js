@@ -73,7 +73,7 @@ function dataPassing(){
         "storeName" : storeName, "phone" : phone, "introduce" : introduce, "type" : type, "address" : address
         , "detailAddress" : detailAddress},
         success:function(data){
-            alert("완료!");
+            alert("가게 등록이 완료되었습니다!");
         },
         error:function(jqXHR, textStatus, errorThrown){
             alert("ajax를 통한 데이터패싱의 에러");

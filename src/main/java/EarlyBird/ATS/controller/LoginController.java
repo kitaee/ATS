@@ -84,7 +84,6 @@ public class LoginController {
         HttpSession session = request.getSession();
         Member member = (Member)session.getAttribute("member");
         if(member==null){
-            System.out.println("asdf");
             System.out.println(member.getName());
             return "index";
         }
