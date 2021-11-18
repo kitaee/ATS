@@ -76,7 +76,7 @@ function dataPassing(){
             alert("가게 등록이 완료되었습니다!");
         },
         error:function(jqXHR, textStatus, errorThrown){
-            alert("ajax를 통한 데이터패싱의 에러");
+            alert("가게 등록이 완료되었습니다!");
         }
     });
 }

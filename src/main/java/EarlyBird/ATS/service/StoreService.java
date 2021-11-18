@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Transactional
 public class StoreService {
 
@@ -18,5 +20,11 @@ public class StoreService {
     public String register(Store store) throws Exception{
         storeRepository.save(store);
         return store.getBusinessName();
+    }
+
+    public Optional<Store> getValueOfStore(String id) throws Exception{
+        Store store = new Store();
+        store = storeRepository.getDetailStore(id).get();
+        return Optional.ofNullable(store);
     }
 }

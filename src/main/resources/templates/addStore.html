@@ -126,10 +126,14 @@
             </div>
         </div>
     </div>
-    <button type = "submit" id="complete" onclick="dataPassing();">완료</button>
+    <button type = "button" id="complete">완료</button>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    document.getElementById("complete").addEventListener("click", function (){
+        dataPassing();
+        location.href="mypage";
+    });
 
     document.getElementById("2table").addEventListener("click", function () {
         img = document.createElement("img");
