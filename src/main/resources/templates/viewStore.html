@@ -16,6 +16,9 @@
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/viewStore.css" rel="stylesheet" />
     <script src="/js/viewStore.js"></script>
+    <script src="/js/otherFunction.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/script.js"></script>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -27,31 +30,36 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
-            <li class="introduceInfo" th:text="${storeName}">가게이름</li>
-            <li class="introduceInfo" th:text="${businessName}">사업자명</li>
-            <li class="introduceInfo" th:text="${address}">주소</li>
-            <li class="introduceInfo" th:text="${phone}">연락처</li>
-            <li class="introduceInfo" th:text="${introduce}">가게소개</li>
+            <li class="introduceInfo" id="storeName" th:text="${storeName}">가게이름</li>
+            <li class="introduceInfo" id="businessName" th:text="${businessName}">사업자명</li>
+            <li class="introduceInfo" id="id" th:text="${id}">사장님 아이디</li>
+            <li class="introduceInfo" id="phone" th:text="${phone}">연락처</li>
+            <li class="introduceInfo" id="address" th:text="${address}">주소</li>
+            <li class="introduceInfo" id="detailAddress"th:text="${detailAddress}">세부주소</li>
+            <li class="introduceInfo" id="type"th:text="${type}">분류</li>
+            <li class="introduceInfo" id="totalSeat"th:text="${totalSeat}">총 좌석수</li>
+            <li class="introduceInfo" id="introduce" th:text="${introduce}">소개</li>
             <table>
                 <tbody>
                 <tr th:each="positionIndex : ${positionList}">
                     <td th:if="${positionIndex.type}=='twoTable'">
-                        <button type="button" id="showTwoTable"  th:stylestyle="position:absolute; top : ; left : 30px; height : 70px; padding : 0px; margin : 0px;  width: 70px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showTwoTable0.png" alt="" style="height: 70px; width:70px;padding : 0px; margin : 0px; border:none; background:none; top : 30px; left : 30px;" ></button>
+                        <button type="button" class="table" id="showTwoTable" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"
+                        onclick="test()"><img src="/image/showTwoTable0.png" alt="" style="height: 70px; width:70px;padding : 0px; margin : 0px; border:none; background:none; top : 500px; left : 500px;" ></button>
                     </td>
                     <td th:if="${positionIndex.type}=='fourTable'">
-                        <button type="button" id="showFourTable" style="position:absolute; height: 70px; width: 100px; padding : 0px; margin : 0px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showFourTable0.png" alt="" style="height: 70px; width:100px;padding : 0px; margin : 0px; border:none; background:none;" ></button>
+                        <button type="button" class="table" id="showFourTable" style="position:absolute; height: 70px; width: 100px; padding : 0px; margin : 0px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showFourTable0.png" alt="" style="height: 70px; width:100px;padding : 0px; margin : 0px; border:none; background:none;" ></button>
                     </td>
                     <td th:if="${positionIndex.type}=='wc'">
-                        <img id="showToilet" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showToilet.png" alt="">
+                        <img id="showToilet" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showToilet.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='counter'">
-                        <img id="showCounter" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showCounter.png" alt="">
+                        <img id="showCounter" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showCounter.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='now'">
-                        <img id="showNow" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showNow.png" alt="">
+                        <img id="showNow" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showNow.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='door'">
-                        <img id="showEntrance" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/exit.png" alt="">
+                        <img id="showEntrance" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/exit.png" alt="">
                     </td>
 
                 </tr>
@@ -69,7 +77,10 @@
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 </body>
-<script th:text="javascript">
-
+<script >
+    function test(){
+        var username = [[${session.user.name}]];
+        alert(username);
+    }
 </script>
 </html>

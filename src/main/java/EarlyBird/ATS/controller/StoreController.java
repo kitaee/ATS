@@ -94,6 +94,10 @@ public class StoreController {
         model.addAttribute("address", valueOfStore.get().getAddress());
         model.addAttribute("phone", valueOfStore.get().getPhone());
         model.addAttribute("introduce", valueOfStore.get().getIntroduce());
+        model.addAttribute("id", valueOfStore.get().getId());
+        model.addAttribute("totalSeat", valueOfStore.get().getTotalSeat());
+        model.addAttribute("type", valueOfStore.get().getType());
+        model.addAttribute("detailAddress", valueOfStore.get().getDetailAddress());
         List<String> position =valueOfStore.get().getPositionIndex();
         ArrayList<positionParsing> positionParsingArrayList = new ArrayList<>();
         for(int i=0; i<position.size(); i++){
@@ -103,6 +107,34 @@ public class StoreController {
             positionParsingArrayList.add(new positionParsing(idxPosition[0],Integer.parseInt(idxPosition[1]),Integer.parseInt(idxPosition[2]),Integer.parseInt(idxPosition[3])));
         }
         model.addAttribute("positionList",positionParsingArrayList);
+        return "viewStore";
+    }
+
+    @RequestMapping(value = "/viewStore", method = { RequestMethod.POST })
+    public String change(
+            @RequestParam("totalSeat")long totalSeat , @RequestParam("positionIndex") List<String> positionIndex,
+            @RequestParam("businessName") String businessName, @RequestParam("storeName") String storeName,
+            @RequestParam("type") String type, @RequestParam("address") String address,
+            @RequestParam("detailAddress") String detailAddress,
+            @RequestParam("phone") String phone, @RequestParam("introduce") String introduce, HttpServletRequest request
+            , @RequestParam("id") String id) throws  Exception{
+
+        Thread.sleep(500);
+        Store store = new Store();
+        store.setId(id);
+        store.setBusinessName(businessName);
+        store.setStoreName(storeName);
+        store.setType(type);
+        store.setAddress(address);
+        store.setDetailAddress(detailAddress);
+        store.setPhone("sex");
+        store.setTotalSeat(totalSeat);
+        store.setIntroduce(store.getIntroduce());
+        store.setPositionIndex(positionIndex);
+        System.out.println(store.getId());
+        System.out.println(store.getPositionIndex());
+
+        storeService.register(store);
         return "viewStore";
     }
 }

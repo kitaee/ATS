@@ -19,7 +19,7 @@ html, body {
 
 .canvasGrid{
     display : grid;
-    grid-template-columns : 220px 1100px;
+    grid-template-columns : 220px 960px;
 }
 
 #canvas{
