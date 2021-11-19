@@ -41,27 +41,25 @@
             <li class="introduceInfo" id="introduce" th:text="${introduce}">소개</li>
             <table>
                 <tbody>
-                <tr th:each="positionIndex : ${positionList}">
-                    <td th:if="${positionIndex.type}=='twoTable'">
-                        <button type="button" class="table" id="showTwoTable" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"
-                        onclick="changeFlag()"><img src="/image/showTwoTable0.png" alt="" style="height: 70px; width:70px;padding : 0px; margin : 0px; border:none; background:none; top : 500px; left : 500px;" ></button>
+                <tr th:each="positionIndex: ${positionList}">
+                    <td th:if="${positionIndex.type}=='twoTable'" >
+                        <img id="showTwoTable0" src="/image/showTwoTable0.png"  onload="Two(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 70px; width:70px;" >
                     </td>
-                    <td th:if="${positionIndex.type}=='fourTable'">
-                        <button type="button" class="table" id="showFourTable" style="position:absolute; height: 70px; width: 100px; padding : 0px; margin : 0px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showFourTable0.png" alt="" style="height: 70px; width:100px;padding : 0px; margin : 0px; border:none; background:none;" ></button>
+                    <td th:if="${positionIndex.type}=='fourTable'" >
+                        <img id="showFourTable0" src="/image/showFourTable0.png"  onload="Four(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 70px; width:70px;"  >
                     </td>
                     <td th:if="${positionIndex.type}=='wc'">
-                        <img id="showToilet" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showToilet.png" alt="">
+                        <img id="showToilet" onload="Toilet(this);" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showToilet.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='counter'">
-                        <img id="showCounter" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showCounter.png" alt="">
+                        <img id="showCounter" onload="Counter(this)"style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showCounter.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='now'">
-                        <img id="showNow" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showNow.png" alt="">
+                        <img id="showNow"onload="Now(this)" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showNow.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='door'">
-                        <img id="showEntrance" class="table" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/exit.png" alt="">
+                        <img id="showEntrance" onload="Entrance(this)" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/exit.png" alt="">
                     </td>
-
                 </tr>
                 </tbody>
             </table>
@@ -76,7 +74,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script th:inline="javascript">
-    function getInformationOfTable(){
+    function getInformationOfTable(choice){
         var indexArray=[];
         var indexPartArray=[]
         var index;
@@ -87,8 +85,14 @@
             indexPartArray.push(target.id);
             indexPartArray.push(target.getBoundingClientRect().left.toFixed());
             indexPartArray.push(target.getBoundingClientRect().top.toFixed());
+
             if(target.getAttribute('height')==height && target.getAttribute('width')==width){
-                indexPartArray.push(1);
+                if(choice){
+                    indexPartArray.push(1);
+                }
+                else{
+                    indexPartArray.push(0);
+                }
             }
             else{
                 indexPartArray.push(0);
@@ -100,7 +104,9 @@
     }
 
     function changeFlag(){
-        var positionIndex = getInformationOfTable();
+        var choice = confirm('자리를 채우시겠습니까? (취소를 누르면 자리가 비워집니다.)');
+        alert(choice);
+        var positionIndex = getInformationOfTable(choice);
         var businessName = /*[[${businessName}]]*/;
         var storeName = /*[[${storeName}]]*/;
         var phone = /*[[${phone}]]*/;
@@ -119,7 +125,7 @@
                         "storeName" : storeName, "phone" : phone, "introduce" : introduce, "type" : type, "address" : address
                         , "detailAddress" : detailAddress, "id" : id},
                 success:function(data){
-                    alert("빈 자리가 찬 자리로 바꼈습니다.");
+                    alert("자리 정보가 최신화되었습니다!");
                 },
                 error:function(jqXHR, textStatus, errorThrown){
                     alert("에러!");
