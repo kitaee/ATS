@@ -34,21 +34,42 @@
             <li class="introduceInfo" th:text="${introduce}">가게소개</li>
             <table>
                 <tbody>
-                    <tr th:each="positionIndex : ${positionIndex}">
-                        <td th:text="${positionIndex[positionIndexStat.index]}"></td>
-                    </tr>
+                <tr th:each="positionIndex : ${positionList}">
+                    <td th:if="${positionIndex.type}=='twoTable'">
+                        <button type="button" id="showTwoTable"  th:stylestyle="position:absolute; top : ; left : 30px; height : 70px; padding : 0px; margin : 0px;  width: 70px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showTwoTable0.png" alt="" style="height: 70px; width:70px;padding : 0px; margin : 0px; border:none; background:none; top : 30px; left : 30px;" ></button>
+                    </td>
+                    <td th:if="${positionIndex.type}=='fourTable'">
+                        <button type="button" id="showFourTable" style="position:absolute; height: 70px; width: 100px; padding : 0px; margin : 0px; border:none; background:none;" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}"><img src="/image/showFourTable0.png" alt="" style="height: 70px; width:100px;padding : 0px; margin : 0px; border:none; background:none;" ></button>
+                    </td>
+                    <td th:if="${positionIndex.type}=='wc'">
+                        <img id="showToilet" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showToilet.png" alt="">
+                    </td>
+                    <td th:if="${positionIndex.type}=='counter'">
+                        <img id="showCounter" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showCounter.png" alt="">
+                    </td>
+                    <td th:if="${positionIndex.type}=='now'">
+                        <img id="showNow" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/showNow.png" alt="">
+                    </td>
+                    <td th:if="${positionIndex.type}=='door'">
+                        <img id="showEntrance" style="position:absolute; height: 70px; width:70px" data-th-height="${positionIndex.y}" data-th-width="${positionIndex.x}" src="/image/exit.png" alt="">
+                    </td>
+
+                </tr>
                 </tbody>
             </table>
         </ul>
     </div>
 </nav>
 <!-- Page Content-->
-<div class="container-fluid p-0">
-
+<div class="container-fluid p-0" id="content" style="top: 300px; left: 800px">
+    asdf
 </div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 </body>
+<script th:text="javascript">
+
+</script>
 </html>

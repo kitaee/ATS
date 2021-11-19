@@ -3,6 +3,7 @@ package EarlyBird.ATS.controller;
 import EarlyBird.ATS.domain.Member;
 import EarlyBird.ATS.domain.Store;
 import EarlyBird.ATS.form.StoreForm;
+import EarlyBird.ATS.form.positionParsing;
 import EarlyBird.ATS.service.StoreService;
 import lombok.Getter;
 import org.slf4j.Logger;
@@ -63,12 +64,8 @@ public class StoreController {
 
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("member");
-//        Thread.sleep(1000);
-//
-//        System.out.println(totalSeat);
-//        for(int i=0;i<positionIndex.size();i++){
-//            System.out.println(positionIndex.get(i));
-//        }
+        Thread.sleep(100);
+
         Store store = new Store();
         store.setId(member.getId());
         store.setBusinessName(businessName);
@@ -80,6 +77,7 @@ public class StoreController {
         store.setTotalSeat(totalSeat);
         store.setIntroduce(introduce);
         store.setPositionIndex(positionIndex);
+
         storeService.register(store);
 
         return "redirect:/mypage";
@@ -89,13 +87,22 @@ public class StoreController {
     public String viewStore(HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession();
         Member member = (Member) session.getAttribute("member");
-        Optional<Store> valueOfStore = storeService.getValueOfStore(member.getId());
+        Optional<Store> valueOfStore = storeService.findStore(member.getId());
+
         model.addAttribute("storeName", valueOfStore.get().getStoreName());
         model.addAttribute("businessName", valueOfStore.get().getBusinessName());
         model.addAttribute("address", valueOfStore.get().getAddress());
         model.addAttribute("phone", valueOfStore.get().getPhone());
         model.addAttribute("introduce", valueOfStore.get().getIntroduce());
+        List<String> position =valueOfStore.get().getPositionIndex();
+        ArrayList<positionParsing> positionParsingArrayList = new ArrayList<>();
+        for(int i=0; i<position.size(); i++){
 
+            String[] idxPosition = position.get(i).split(",");
+
+            positionParsingArrayList.add(new positionParsing(idxPosition[0],Integer.parseInt(idxPosition[1]),Integer.parseInt(idxPosition[2]),Integer.parseInt(idxPosition[3])));
+        }
+        model.addAttribute("positionList",positionParsingArrayList);
         return "viewStore";
     }
 }

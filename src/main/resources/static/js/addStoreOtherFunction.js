@@ -1,17 +1,3 @@
-function getIndexOfTable(){
-    var indexArray=[];
-    var indexPartArray=[]
-    var index;
-    for(index=0; index<document.getElementsByClassName('drag').length; index++){
-        var target = document.getElementsByClassName('drag')[index];
-        indexPartArray.push(target.id);
-        indexPartArray.push(target.getBoundingClientRect().left);
-        indexPartArray.push(target.getBoundingClientRect().top);
-        indexArray.push(indexPartArray);
-        indexPartArray=[];
-    }
-    return indexArray;
-}
 
 function plus()  {
     // 결과를 표시할 element
@@ -32,8 +18,9 @@ function getIndexOfTable(){
     for(index=0; index<document.getElementsByClassName('drag').length; index++){
         var target = document.getElementsByClassName('drag')[index];
         indexPartArray.push(target.id);
-        indexPartArray.push(target.getBoundingClientRect().left);
-        indexPartArray.push(target.getBoundingClientRect().top);
+        indexPartArray.push(target.getBoundingClientRect().left.toFixed());
+        indexPartArray.push(target.getBoundingClientRect().top.toFixed());
+        indexPartArray.push(0);
         indexArray.push(indexPartArray);
         indexPartArray=[];
     }

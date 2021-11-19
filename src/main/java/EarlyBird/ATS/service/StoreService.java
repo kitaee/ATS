@@ -1,5 +1,6 @@
 package EarlyBird.ATS.service;
 
+import EarlyBird.ATS.domain.Member;
 import EarlyBird.ATS.domain.Store;
 import EarlyBird.ATS.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class StoreService {
         return store.getBusinessName();
     }
 
-    public Optional<Store> getValueOfStore(String id) throws Exception{
+    public Optional<Store> findStore(String id) throws Exception{
         Store store = new Store();
         store = storeRepository.getDetailStore(id).get();
         return Optional.ofNullable(store);
