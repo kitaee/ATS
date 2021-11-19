@@ -119,7 +119,6 @@ public class StoreController {
             @RequestParam("phone") String phone, @RequestParam("introduce") String introduce, HttpServletRequest request
             , @RequestParam("id") String id) throws  Exception{
 
-        Thread.sleep(500);
         Store store = new Store();
         store.setId(id);
         store.setBusinessName(businessName);
@@ -127,12 +126,10 @@ public class StoreController {
         store.setType(type);
         store.setAddress(address);
         store.setDetailAddress(detailAddress);
-        store.setPhone("sex");
+        store.setPhone(phone);
         store.setTotalSeat(totalSeat);
-        store.setIntroduce(store.getIntroduce());
+        store.setIntroduce(introduce);
         store.setPositionIndex(positionIndex);
-        System.out.println(store.getId());
-        System.out.println(store.getPositionIndex());
 
         storeService.register(store);
         return "viewStore";

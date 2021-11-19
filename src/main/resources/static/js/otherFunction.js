@@ -24,7 +24,7 @@ function getInformationOfTable(){
 function changeFlag(){
 
     var positionIndex = getInformationOfTable();
-    var businessName = document.getElementById('businessName');
+    var businessName = document.getElementById('businessName').value;
     var storeName = document.getElementById('storeName');
     var phone = document.getElementById('phone').value;
     var introduce = document.getElementById('introduce').value;
