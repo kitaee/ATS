@@ -15,7 +15,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/style.css" rel="stylesheet" />
     <link href="css/viewStore.css" rel="stylesheet" />
-    <script src="/js/viewStore.js"></script>
+    <script src="/js/test.js"></script>
     <script src="/js/otherFunction.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript" src="/script.js"></script>
@@ -43,22 +43,22 @@
                 <tbody>
                 <tr th:each="positionIndex: ${positionList}">
                     <td th:if="${positionIndex.type}=='twoTable'" >
-                        <img id="showTwoTable0" src="/image/showTwoTable0.png"  onload="Two(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 70px; width:70px;" >
+                        <img id="showTwoTable0" class="table" onclick="changeFlag()" src="/image/showTwoTable0.png"  onload="Two(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 150px; width:150px;" >
                     </td>
                     <td th:if="${positionIndex.type}=='fourTable'" >
-                        <img id="showFourTable0" src="/image/showFourTable0.png"  onload="Four(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 70px; width:70px;"  >
+                        <img id="showFourTable0" class="table" onclick="changeFlag()" src="/image/showFourTable0.png"  onload="Four(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 150px; width:150px;"  >
                     </td>
                     <td th:if="${positionIndex.type}=='wc'">
-                        <img id="showToilet" onload="Toilet(this);" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showToilet.png" alt="">
+                        <img id="showToilet" onload="Toilet(this);" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showToilet.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='counter'">
-                        <img id="showCounter" onload="Counter(this)"style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showCounter.png" alt="">
+                        <img id="showCounter" onload="Counter(this)"style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showCounter.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='now'">
-                        <img id="showNow"onload="Now(this)" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showNow.png" alt="">
+                        <img id="showNow"onload="Now(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showNow.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='door'">
-                        <img id="showEntrance" onload="Entrance(this)" style="position:absolute; height: 70px; width:70px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/exit.png" alt="">
+                        <img id="showEntrance" onload="Entrance(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/exit.png" alt="">
                     </td>
                 </tr>
                 </tbody>
@@ -78,24 +78,68 @@
         var indexArray=[];
         var indexPartArray=[]
         var index;
-        var height = event.target.getAttribute('height');
-        var width = event.target.getAttribute('width');
+        var top = event.target.style.top;
+        var left = event.target.style.left;
+
         for(index=0; index<document.getElementsByClassName('table').length; index++){
             var target = document.getElementsByClassName('table')[index];
             indexPartArray.push(target.id);
             indexPartArray.push(target.getBoundingClientRect().left.toFixed());
             indexPartArray.push(target.getBoundingClientRect().top.toFixed());
 
-            if(target.getAttribute('height')==height && target.getAttribute('width')==width){
-                if(choice){
+            if(target.style.top==top && target.style.left==left){
+                if(choice){ // 자리를 채우겠다
+                    if(target.id=='showTwoTable0'){
+                        target.src = "/image/showTwoTable1.png";
+                        target.id="showTwoTable1";
+                        indexPartArray.push(1);
+                    }
+                    if(target.id=='showTwoTable1'){
+                        target.src = "/image/showTwoTable1.png";
+                        target.id="showTwoTable1";
+                        indexPartArray.push(1);
+                    }
+                    if(target.id=='showFourTable0'){
+                        target.src = "/image/showFourTable1.png";
+                        target.id="showFourTable1";
+                        indexPartArray.push(1);
+                    }
+                    if(target.id=='showFourTable1'){
+                        target.src = "/image/showFourTable1.png";
+                        target.id="showFourTable1";
+                        indexPartArray.push(1);
+                    }
+                }
+                else{
+                    if(target.id=='showTwoTable0'){
+                        target.src = "/image/showTwoTable0.png";
+                        target.id="showTwoTable0";
+                        indexPartArray.push(0);
+                    }
+                    if(target.id=='showTwoTable1'){
+                        target.src = "/image/showTwoTable0.png";
+                        target.id="showTwoTable0";
+                        indexPartArray.push(0);
+                    }
+                    if(target.id=='showFourTable0'){
+                        target.src = "/image/showFourTable0.png";
+                        target.id="showFourTable0";
+                        indexPartArray.push(0);
+                    }
+                    if(target.id=='showFourTable1'){
+                        target.src = "/image/showFourTable0.png";
+                        target.id="showFourTable0";
+                        indexPartArray.push(0);
+                    }
+                }
+            }
+            else{
+                if(target.id=='showFourTable1' || target.id=='showTwoTable1'){
                     indexPartArray.push(1);
                 }
                 else{
                     indexPartArray.push(0);
                 }
-            }
-            else{
-                indexPartArray.push(0);
             }
             indexArray.push(indexPartArray);
             indexPartArray=[];
@@ -105,7 +149,6 @@
 
     function changeFlag(){
         var choice = confirm('자리를 채우시겠습니까? (취소를 누르면 자리가 비워집니다.)');
-        alert(choice);
         var positionIndex = getInformationOfTable(choice);
         var businessName = /*[[${businessName}]]*/;
         var storeName = /*[[${storeName}]]*/;
@@ -116,6 +159,8 @@
         var address = /*[[${address}]]*/;
         var totalSeat = /*[[${totalSeat}]]*/;
         var id = /*[[${id}]]*/;
+
+        alert(positionIndex);
 
         $.ajax({
                 url:'/viewStore',
