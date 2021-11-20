@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Resume - Start Bootstrap Theme</title>
+    <title>자리있나요?</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
@@ -43,22 +43,22 @@
                 <tbody>
                 <tr th:each="positionIndex: ${positionList}">
                     <td th:if="${positionIndex.type}=='twoTable'" >
-                        <img id="showTwoTable0" class="table" onclick="changeFlag()" src="/image/showTwoTable0.png"  onload="Two(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 150px; width:150px;" >
+                        <img id="twoTable" name="showTwoTable0" class="table" onclick="changeFlag()" src="/image/showTwoTable0.png"  onload="Two(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}"  style="position:absolute;height: 150px; width:150px;" >
                     </td>
                     <td th:if="${positionIndex.type}=='fourTable'" >
-                        <img id="showFourTable0" class="table" onclick="changeFlag()" src="/image/showFourTable0.png"  onload="Four(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}"  style="position:absolute;height: 150px; width:150px;"  >
+                        <img id="fourTable" name="showFourTable0" class="table" onclick="changeFlag()" src="/image/showFourTable0.png"  onload="Four(this)" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}"  style="position:absolute;height: 150px; width:150px;"  >
                     </td>
                     <td th:if="${positionIndex.type}=='wc'">
-                        <img id="showToilet" onload="Toilet(this);" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showToilet.png" alt="">
+                        <img id="wc" onload="Toilet(this);" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}" src="/image/showToilet.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='counter'">
-                        <img id="showCounter" onload="Counter(this)"style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showCounter.png" alt="">
+                        <img id="counter" onload="Counter(this)"style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}" src="/image/showCounter.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='now'">
-                        <img id="showNow"onload="Now(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/showNow.png" alt="">
+                        <img id="now"onload="Now(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}" src="/image/showNow.png" alt="">
                     </td>
                     <td th:if="${positionIndex.type}=='door'">
-                        <img id="showEntrance" onload="Entrance(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x}" src="/image/exit.png" alt="">
+                        <img id="door" onload="Entrance(this)" style="position:absolute; height: 100px; width:100px" th:data-top="${positionIndex.y}" th:data-left="${positionIndex.x+52}" src="/image/exit.png" alt="">
                     </td>
                 </tr>
                 </tbody>
@@ -89,52 +89,52 @@
 
             if(target.style.top==top && target.style.left==left){
                 if(choice){ // 자리를 채우겠다
-                    if(target.id=='showTwoTable0'){
+                    if(target.name=='showTwoTable0'){
                         target.src = "/image/showTwoTable1.png";
-                        target.id="showTwoTable1";
+                        target.name="showTwoTable1";
                         indexPartArray.push(1);
                     }
-                    if(target.id=='showTwoTable1'){
+                    if(target.name=='showTwoTable1'){
                         target.src = "/image/showTwoTable1.png";
-                        target.id="showTwoTable1";
+                        target.name="showTwoTable1";
                         indexPartArray.push(1);
                     }
-                    if(target.id=='showFourTable0'){
+                    if(target.name=='showFourTable0'){
                         target.src = "/image/showFourTable1.png";
-                        target.id="showFourTable1";
+                        target.name="showFourTable1";
                         indexPartArray.push(1);
                     }
-                    if(target.id=='showFourTable1'){
+                    if(target.name=='showFourTable1'){
                         target.src = "/image/showFourTable1.png";
-                        target.id="showFourTable1";
+                        target.name="showFourTable1";
                         indexPartArray.push(1);
                     }
                 }
                 else{
-                    if(target.id=='showTwoTable0'){
+                    if(target.name=='showTwoTable0'){
                         target.src = "/image/showTwoTable0.png";
-                        target.id="showTwoTable0";
+                        target.name="showTwoTable0";
                         indexPartArray.push(0);
                     }
-                    if(target.id=='showTwoTable1'){
+                    if(target.name=='showTwoTable1'){
                         target.src = "/image/showTwoTable0.png";
-                        target.id="showTwoTable0";
+                        target.name="showTwoTable0";
                         indexPartArray.push(0);
                     }
-                    if(target.id=='showFourTable0'){
+                    if(target.name=='showFourTable0'){
                         target.src = "/image/showFourTable0.png";
-                        target.id="showFourTable0";
+                        target.name="showFourTable0";
                         indexPartArray.push(0);
                     }
-                    if(target.id=='showFourTable1'){
+                    if(target.name=='showFourTable1'){
                         target.src = "/image/showFourTable0.png";
-                        target.id="showFourTable0";
+                        target.name="showFourTable0";
                         indexPartArray.push(0);
                     }
                 }
             }
             else{
-                if(target.id=='showFourTable1' || target.id=='showTwoTable1'){
+                if(target.name=='showFourTable1' || target.name=='showTwoTable1'){
                     indexPartArray.push(1);
                 }
                 else{
@@ -160,8 +160,6 @@
         var totalSeat = /*[[${totalSeat}]]*/;
         var id = /*[[${id}]]*/;
 
-        alert(positionIndex);
-
         $.ajax({
                 url:'/viewStore',
                 type:'POST',
@@ -170,7 +168,6 @@
                         "storeName" : storeName, "phone" : phone, "introduce" : introduce, "type" : type, "address" : address
                         , "detailAddress" : detailAddress, "id" : id},
                 success:function(data){
-                    alert("자리 정보가 최신화되었습니다!");
                 },
                 error:function(jqXHR, textStatus, errorThrown){
                     alert("에러!");
