@@ -29,8 +29,6 @@ public class MemberService {
         else return 0;
     }
     public Optional<Member> findMember(String id) throws Exception{
-        Member member = new Member();
-        member = memberRepository.getDetailMember(id).get();
-        return Optional.ofNullable(member);
+        return memberRepository.getDetailMember(id);
     }
 }

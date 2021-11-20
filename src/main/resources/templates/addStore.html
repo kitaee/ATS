@@ -205,17 +205,78 @@
                 var imageElements = document.getElementsByClassName("drag");
                 for(var i=0;i<imageElements.length;i++){
                     if(activeTarget==imageElements[i]){
-
-                        if(activeTarget.x<223 || activeTarget.x>1253 || activeTarget.y>1423 || activeTarget.y<810){
-                            alert("테이블을 사각형안에 넣어주세요!");
-                            if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
-                                const resultElement = document.getElementById('seat');
-                                let number = resultElement.innerText;
-                                number = parseInt(number) - 1;
-                                resultElement.innerText = number;
+                       if(activeTarget.id=='twoTable'){
+                            if(activeTarget.x<209 || activeTarget.x>1042 || activeTarget.y>1355 || activeTarget.y<812){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
                             }
-                            activeTarget.remove();
-                        }
+                       }
+                       if(activeTarget.id=='fourTable'){
+                            if(activeTarget.x<220 || activeTarget.x>1030 || activeTarget.y>1355 || activeTarget.y<810){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
+                            }
+                       }
+                       if(activeTarget.id=='counter'){
+                            if(activeTarget.x<219 || activeTarget.x>1082 || activeTarget.y>1377 || activeTarget.y<818){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
+                            }
+                       }
+                       if(activeTarget.id=='door'){
+                            if(activeTarget.x<206 || activeTarget.x>1095 || activeTarget.y>1376 || activeTarget.y<822){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
+                            }
+                       }
+                       if(activeTarget.id=='wc'){
+                            if(activeTarget.x<219 || activeTarget.x>1083 || activeTarget.y>1374 || activeTarget.y<824){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
+                            }
+                       }
+                       if(activeTarget.id=='now'){
+                            if(activeTarget.x<196 || activeTarget.x>1104 || activeTarget.y>1375 || activeTarget.y<821){
+                                alert("테이블을 사각형안에 넣어주세요!");
+                                if(activeTarget.id=='twoTable' || activeTarget.id=='fourTable'){
+                                    const resultElement = document.getElementById('seat');
+                                    let number = resultElement.innerText;
+                                    number = parseInt(number) - 1;
+                                    resultElement.innerText = number;
+                                }
+                                activeTarget.remove();
+                            }
+                       }
                     }
                 }
 
